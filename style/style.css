@@ -8,11 +8,7 @@ body
 	display: inline; 
 }
 
-.header
-{
-	display: inline-block; 
-	float: left; 
-}
+
 
 .header li 
 {
@@ -30,4 +26,19 @@ body
 .header li a:hover
 {
 	color: black;
+}
+
+.form_relation
+{
+	padding-top: 20px; 
+	display: block;
+}
+
+.node
+{
+	border: 1px solid black;
+	border-radius: 50%; 
+	padding: 20px; 
+	width: 50px; 
+	text-align: center; 
 }

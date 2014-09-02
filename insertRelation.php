@@ -12,7 +12,9 @@
 	include 'connection.php'; 
 
 	$query = "INSERT INTO relation(fName, lName, sex, YearOfBirth, PlaceOfBirth, Spouse, parentID) VALUES ('$fName', '$lName', '$sex', '$YearOfBirth', '$PlaceOfBirth', '$Spouse', '$parentID')";
-	mysqli_query($con, $$query); 
+	mysqli_query($con, $query); 
+
+	echo "Added to Database"; 
 
 
 	mysqli_close($con); 
