@@ -1,0 +1,33 @@
+body 
+{
+	font-family: Geneva, Tahoma, Verdana, sans-serif;
+}
+
+.title
+{
+	display: inline; 
+}
+
+.header
+{
+	display: inline-block; 
+	float: left; 
+}
+
+.header li 
+{
+	list-style-type: none; 
+	display: inline; 
+
+}
+
+.header li a 
+{
+	text-decoration: none; 
+	color: grey;
+}
+
+.header li a:hover
+{
+	color: black;
+}
