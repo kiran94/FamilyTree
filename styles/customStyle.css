@@ -78,3 +78,33 @@ body
 	background-color: #d3d3d3; 
 	color: #d3d3d3;
 }
+
+#time-line
+{
+	border: 5px solid #d3d3d3; 
+	padding: 10px; 
+}
+
+#min-date
+{
+	text-align: left; 
+}
+
+#max-date
+{
+	text-align: right; 
+}
+
+.time_plot
+{
+	position: absolute;
+
+	background-color: grey; 
+	width: 5px; 
+	height: 5px; 
+	color: grey;
+	border-radius: 100%; 
+	margin-top: 20px;
+
+	font-size: 10px;  
+}

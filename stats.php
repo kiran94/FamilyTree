@@ -116,9 +116,36 @@
 
 					$row = mysqli_fetch_array($set);
 
-					echo "<p>The time line varies from " . $row['min']  .  " to " . $row['max'] . "</p> "; 
+					$min = $row['min']; 
+					$max = $row['max']; 
+
+
+					echo "<p>The time line varies from " . $min  .  " to " . $max . ".</p> ";
+					mysqli_close($con); 
+
+					$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
+					mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
+
+
+					$query = "SELECT YearOfBirth AS year FROM relation WHERE YearOfBirth<>0"; 
+
+					$set = mysqli_query($con, $query); 
+
+					while($row = mysqli_fetch_array($set)) 
+					{
+						$plot = (($row['year'] - $min) / ($max - $min))*95; 
+						echo "<div class='time_plot' style='margin-left:" . $plot  . "%;'>" . $row['year'] . "</div>"; 
+					}
+					mysqli_close($con); 
+
 
 				?>
+
+				<hr id='time-line' />
+				<div id='min-date'><?php echo $min;  ?></div>
+				<div id='max-date'><?php echo $max;  ?></div>
+
+				
 
 				
 
