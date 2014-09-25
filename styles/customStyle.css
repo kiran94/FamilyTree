@@ -31,10 +31,36 @@ body
 .page-break 
 {
 	border: 1px solid #d3d3d3;
-	
+
 }
 
 .space-maker
 {
-	margin-top: 10px; 
+	/*margin-top: 10px; */
+}
+
+.family-starts ul li 
+{
+	display: inline-block; 
+	border: 1px solid #d3d3d3; 
+	/*border-radius: 15px; */
+	padding: 2px; 
+	cursor: pointer; 
+}
+
+.family-starts ul li:hover
+{
+	background-color: grey; 
+
+}
+
+.family-line 
+{
+	
+	display: none; 
+}
+
+.current-shown
+{
+	display: block; 
 }
