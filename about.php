@@ -12,7 +12,7 @@
 	<!-- STYLE -->
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="styles/customStyle.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="styles/tree.css" /> -->
+	<link rel="stylesheet" type="text/css" href="styles/tree.css" />
 	<!-- END STYLE -->
 </head>
 <body>
@@ -30,6 +30,7 @@
 						<li><a href="#">About</a></li>
 					</ul>
 				</div>
+
 			</div>
 		
 
@@ -43,7 +44,7 @@
 					This web application creates a family tree from a backend database. Each member of the family is stored in the database with various attributes both known and unknown. 
 					The application extracts these details and creates a tree using the relationship between the nodes infered from a relational database.
 
-					 
+
 
 				</p>
 				

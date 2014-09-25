@@ -12,7 +12,7 @@
 	<!-- STYLE -->
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="styles/customStyle.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="styles/tree.css" /> -->
+	<link rel="stylesheet" type="text/css" href="styles/tree.css" />
 	<!-- END STYLE -->
 </head>
 <body>
@@ -26,7 +26,7 @@
 				<div id='nav'>
 					<ul>
 						<li><a href="index.php">Home</a></li>
-						<li><a href="stats.php">Stats</a></li>
+						<li><a href="#">Stats</a></li>
 						<li><a href="about.php">About</a></li>
 					</ul>
 				</div>
@@ -100,6 +100,31 @@
 
 				<hr class='page-break'/>
 				<h3>Place Of Birth</h3>
+				<?php 
+					  //Create connection and set database. 
+				      $con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
+				      mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
+
+				      //Get the name of the person at the split. 
+				      $query = "SELECT PlaceOfBirth, COUNT(PlaceOfBirth) AS place FROM relation GROUP BY PlaceOfBirth"; 
+				      //Query the database. 
+				      $set = mysqli_query($con, $query); 
+				      //Get the array.
+				      while($row = mysqli_fetch_array($set))
+				      {
+				        $proportion = ($row['place']/$total)*100; 
+
+				        echo "<div class='stat_group'>"; 
+							echo "<h4>" . $row['PlaceOfBirth'] . "</h4>" . "<h5>" . $row['place'] . "%<h5>";
+							echo "<div class='prop' style='width:". round($proportion) ."%;'>value</div>";  
+						echo "</div>";  
+				      }
+     
+      
+      mysqli_close($con);
+
+				?>
+
 
 				<hr class='page-break'/>
 				<h3>Time Scale</h3>
@@ -120,7 +145,7 @@
 					$max = $row['max']; 
 
 
-					echo "<p>The time line varies from " . $min  .  " to " . $max . ".</p> ";
+					echo "<p>The time line varies from " . $min  .  " to " . $max . ". Below are each family members birth year plotted against the time line.</p> ";
 					mysqli_close($con); 
 
 					$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
@@ -133,7 +158,7 @@
 
 					while($row = mysqli_fetch_array($set)) 
 					{
-						$plot = (($row['year'] - $min) / ($max - $min))*95; 
+						$plot = (($row['year'] - $min) / ($max - $min))*97; 
 						echo "<div class='time_plot' style='margin-left:" . $plot  . "%;'>" . $row['year'] . "</div>"; 
 					}
 					mysqli_close($con); 
@@ -142,9 +167,25 @@
 				?>
 
 				<hr id='time-line' />
+
 				<div id='min-date'><?php echo $min;  ?></div>
 				<div id='max-date'><?php echo $max;  ?></div>
 
+				<?php 
+					$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
+					mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
+
+
+					$query = "SELECT COUNT(*) AS num FROM relation WHERE YearOfBirth=0"; 
+
+					$set = mysqli_query($con, $query); 
+
+					$row = mysqli_fetch_array($set); 
+
+					echo "There are " . $row['num'] . " family members with birth years which are unknown."; 
+
+
+				?>
 				
 
 				
