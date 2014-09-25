@@ -43,10 +43,13 @@
 				<p>
 					This web application creates a family tree from a backend database. Each member of the family is stored in the database with various attributes both known and unknown. 
 					The application extracts these details and creates a tree using the relationship between the nodes infered from a relational database.
-
-
-
 				</p>
+
+				<p>
+					If you have any suggestions for the on-going project which I am conducting in my spare time while at university then please contact me <a href='mailto:kiran_patel94@hotmail.com'>here</a>. Alternatively if you are a family member and have any updated information or maybe identified some inaccurate information then please contact me on the same address. 
+				</p>
+
+		
 				
 
 			</div>

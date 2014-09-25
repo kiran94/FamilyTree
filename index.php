@@ -48,7 +48,7 @@
 
 					//Container for list of start nodes. 
 					echo "<div class='family-starts'>"; 
-						echo "<p>Click the line you want to view..</p>"; 
+						echo "<p>Click the family line you want to view..</p>"; 
 						echo "<ul>"; 
 
 							//For each starting node.. 
@@ -71,7 +71,15 @@
 								//Get the index of the current iteration. 
 								$currentIndex = $i + 1; 
 								//Create a list of the current index. 
-								echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
+								if($currentIndex==1)
+								{
+									echo "<li class='line-start current-line' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
+								}
+								else
+								{
+									echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
+								}
+								
 								//Close connection. 
 								mysqli_close($con);
 							}

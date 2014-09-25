@@ -85,7 +85,7 @@
 
 						echo "<div class='stat_group'>"; 
 							echo "<h4>" . $row['sex']  . "</h4>" . "<h5>" . round($proportion, 2) . "%<h5>";
-							echo "<div class='prop' style='width:". round($proportion) ."%;'>value</div>";  
+							echo "<div class='prop' style='width:". round($proportion) ."%;'>l</div>";  
 						echo "</div>"; 
 					}
 
@@ -116,12 +116,12 @@
 
 				        echo "<div class='stat_group'>"; 
 							echo "<h4>" . $row['PlaceOfBirth'] . "</h4>" . "<h5>" . $row['place'] . "%<h5>";
-							echo "<div class='prop' style='width:". round($proportion) ."%;'>value</div>";  
+							echo "<div class='prop' style='width:". round($proportion) ."%;'>l</div>";  
 						echo "</div>";  
 				      }
      
       
-      mysqli_close($con);
+      					mysqli_close($con);
 
 				?>
 
@@ -156,10 +156,14 @@
 
 					$set = mysqli_query($con, $query); 
 
+					$counter = 1; 
+
 					while($row = mysqli_fetch_array($set)) 
 					{
 						$plot = (($row['year'] - $min) / ($max - $min))*97; 
-						echo "<div class='time_plot' style='margin-left:" . $plot  . "%;'>" . $row['year'] . "</div>"; 
+						echo "<div class='time_plot' id='" . $counter  . "' style='margin-left:" . $plot  . "%;'>" . $row['year'] . "</div>"; 
+						echo "<div class='time_popover' id='popover_" . $counter . "'>" . $row['year'] . "</div>"; 
+						$counter++; 
 					}
 					mysqli_close($con); 
 
@@ -215,6 +219,6 @@
 
 	<script type="text/javascript" src='scripts/jquery.js'></script>
 	<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
-	<!-- <script type="text/javascript" src='scripts/customTrans.js'></script> --> 
+	<script type="text/javascript" src='scripts/customTrans.js'></script> 
 </body>
 </html>
