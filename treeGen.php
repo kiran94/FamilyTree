@@ -1,64 +1,25 @@
-<!DOCTYPE html> 
-<html>
-<head>
-	<title></title>
-	<link rel="stylesheet" type="text/css" href="tree.css">
-</head>
-<body>
-	<?php 
-
+<?php 
 		error_reporting(E_ERROR | E_PARSE);
-		echo "<div class='tree'>"; 
-		echo "<ul>";
 
-			//connection to DB 
-
-			//create query of node 
-
-			//While a node 
-			//generate there node
-			// ul 
-			// li for each person in the node
-			//Within each li, search for more decendants and create a node for them
-			//cycle through the decendants and then return 
+		function startTags($parentID)
+		{
+			
+			echo "<div class='tree'>"; 
+			echo "<ul>";
 
 			$host = "localhost";
 			$username="root"; 
 			$password=""; 
 			$db="familytree";
+ 
+			createDesc($host, $username, $password, $db, $parentID);
+		}
 
-			$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
-			mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
-
-			$parentID = 0; 
-
-			$query = "SELECT * FROM relation WHERE parentID='$parentID' "; 
-
-			$set = mysqli_query($con, $query); 
-
-			while($masterRow = mysqli_fetch_array($set))
-			{
-					mysqli_close($con); 
-
-					echo "<li>"; 
-						if($row['Spouse']!='')
-						{
-							echo "<a href='#'>" . $masterRow['fName'] . " / " . $masterRow['Spouse'] . "</a>"; 
-						}
-						else
-						{
-							echo "<a href='#'>" . $masterRow['fName'] . "</a>"; 
-						}
-						$parentID = $masterRow['relationID']; 
-
-						createDesc($host, $username, $password, $db, $parentID); 
-
-					echo "</li>"; 
-				
-			}
+		function endTags()
+		{
 			echo "</ul>"; 
-
-		echo "</div>"; 
+			echo "</div>"; 
+		}
 
 		function createDesc($host, $username, $password, $db, $currentParentID)
 		{
@@ -91,9 +52,7 @@
 			}
 
 			echo "</ul>"; 
+			mysqli_close($con); 
 		}
 
 	?>
-
-</body>
-</html>

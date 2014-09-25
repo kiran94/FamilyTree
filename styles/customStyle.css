@@ -1,0 +1,40 @@
+body
+{
+	font-family: Perpetua, Baskerville, "Big Caslon", "Palatino Linotype", Palatino, "URW Palladio L", "Nimbus Roman No9 L", serif;
+}
+
+
+#title
+{
+	text-decoration: underline; 
+	text-align: center;  
+}
+
+
+#nav
+{
+	text-align: center; 
+}
+
+#nav li 
+{
+	list-style-type: none; 
+	font-size: 1em; 
+	/*border: 1px solid grey; */
+	
+
+	text-align: center; 
+	margin: 5px; 
+	display: inline;
+}
+
+.page-break 
+{
+	border: 1px solid #d3d3d3;
+	
+}
+
+.space-maker
+{
+	margin-top: 10px; 
+}
