@@ -29,8 +29,7 @@
 
 			<?php include 'treeGen.php'; ?>
 
-		
-
+	
 			<!-- DESKTOP VERSION -->
 			<div class='col-sm-12 hidden-xs'>
 
@@ -38,39 +37,50 @@
 					//Indexes used to splice the family tree
 					$indexes=array(10, 37, 52, 70, 74); 
 
+					//Container for list of start nodes. 
 					echo "<div class='family-starts'>"; 
 						echo "<ul>"; 
 
+							//For each starting node.. 
 							for($i=0; $i<sizeof($indexes); $i++)
 							{
 
-								$host = "localhost";
-								$username="root"; 
-								$password=""; 
-								$db="familytree";
+								// //Get connection information.. 
+								// $host = "localhost";
+								// $username="root"; 
+								// $password=""; 
+								// $db="familytree";
+								include 'connectionInfo.php'; 
 
+
+								//Create connection and set database. 
 								$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
 								mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
 
+								//Get the name of the person at the split. 
 								$query = "SELECT fName FROM relation WHERE relationID=" . $indexes[$i]; 
+								//Query the database. 
 								$set = mysqli_query($con, $query); 
-
+								//Get the array.
 								$row = mysqli_fetch_array($set); 
-
+								//Get the index of the current iteration. 
 								$currentIndex = $i + 1; 
-
+								//Create a list of the current index. 
 								echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
-
+								//Close connection. 
 								mysqli_close($con);
 							}
 						echo "</ul>"; 
 					echo "</div>"; 
 
 
+					//For each node.. 
 					for($i=0; $i<sizeof($indexes); $i++)
 					{
+						//Get the current index.. 
 						$currentTree = $i + 1; 
 
+						//If it is the first one then add a current-shown class. 
 						if($currentTree==1)
 						{
 							echo "<div class='family-line current-shown' id='tree_" . $currentTree . "'>"; 
@@ -80,6 +90,7 @@
 							echo "<div class='family-line' id='tree_" . $currentTree . "'>"; 
 						}
 
+						//Geneerate tree for the current index.. 
 						startTags($indexes[$i]); 
 						endTags(); 	
 						echo "</div>"; 
@@ -89,16 +100,16 @@
 
 				?>
 
-		
-
-
 			</div>
+			<!-- END DESKTOP -->
+
+
 
 			<!-- MOBILE SUPPORT -->
 			<div class='visible-xs'>
 				<h3>Currently no mobile support on this application. Sorry! </h3>
 			</div>
-
+			<!-- END MOBILE -->
 		
 
 		
