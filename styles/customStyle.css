@@ -46,13 +46,16 @@ body
 	/*border-radius: 15px; */
 	padding: 2px; 
 	cursor: pointer; 
+
+	margin-left: 5px; 
 }
 
 .family-starts ul li:hover
 {
-	background-color: grey; 
+	background-color: #d3d3d3; 
 
 }
+
 
 .family-line 
 {
@@ -63,4 +66,15 @@ body
 .current-shown
 {
 	display: block; 
+}
+
+.stat_group h2
+{
+	display: inline; 
+}
+
+.prop
+{
+	background-color: #d3d3d3; 
+	color: #d3d3d3;
 }

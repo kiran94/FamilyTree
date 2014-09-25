@@ -7,10 +7,6 @@
 			echo "<div class='tree'>"; 
 			echo "<ul>";
 
-			// $host = "localhost";
-			// $username="root"; 
-			// $password=""; 
-			// $db="familytree";
 			include 'connectionInfo.php'; 
  
 			createDesc($host, $username, $password, $db, $parentID);

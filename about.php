@@ -1,7 +1,7 @@
 <!DOCTYPE html> 
 <html lang='en'>
 <head>
-	<title>Add Member | Family Tree | Developed By Kiran Patel</title>
+	<title>About | Family Tree | Developed By Kiran Patel</title>
 
 	<!-- META -->
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -27,10 +27,9 @@
 					<ul>
 						<li><a href="index.php">Home</a></li>
 						<li><a href="stats.php">Stats</a></li>
-						<li><a href="about.php">About</a></li>
+						<li><a href="#">About</a></li>
 					</ul>
 				</div>
-
 			</div>
 		
 
@@ -39,13 +38,14 @@
 		
 			<!-- DESKTOP VERSION -->
 			<div class='col-sm-12 hidden-xs'>
+				<h2>About</h2>
+				<p>
+					This web application creates a family tree from a backend database. Each member of the family is stored in the database with various attributes both known and unknown. 
+					The application extracts these details and creates a tree using the relationship between the nodes infered from a relational database.
 
-				<h2>Add Member</h2>
-				<p>This part of the application allows the addition of more family members. New members should be linked to already exisiting members.  </p>
-				<form method='POST' action='#'>
+					 
 
-				</form>
-
+				</p>
 				
 
 			</div>
