@@ -38,7 +38,7 @@
 
 		
 			<!-- DESKTOP VERSION -->
-			<div class='col-sm-12 hidden-xs'>
+			<div class='col-sm-12'>
 				<h2>About</h2>
 				<p>
 					This web application creates a family tree from a backend database. Each member of the family is stored in the database with various attributes both known and unknown. 
@@ -57,11 +57,7 @@
 
 
 
-			<!-- MOBILE SUPPORT -->
-			<div class='visible-xs'>
-				<h3>Currently no mobile support on this application. Sorry! </h3>
-			</div>
-			<!-- END MOBILE -->
+			
 		
 
 		
