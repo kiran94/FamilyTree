@@ -46,7 +46,7 @@
 				</p>
 
 				<p>
-					If you have any suggestions for the on-going project which I am conducting in my spare time while at university then please contact me <a href='mailto:kiran_patel94@hotmail.com'>here</a>. Alternatively if you are a family member and have any updated information or maybe identified some inaccurate information then please contact me on the same address. 
+					If you have any suggestions for this on-going project which I am conducting in my spare time while at university then please contact me <a href='mailto:kiran_patel94@hotmail.com'>here</a>. Alternatively if you are a family member and have any updated information or maybe identified some inaccurate information then please contact me on the same address. 
 				</p>
 
 		

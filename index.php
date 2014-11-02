@@ -28,6 +28,7 @@
 						<li><a href="#">Home</a></li>
 						<li><a href="stats.php">Stats</a></li>
 						<li><a href="about.php">About</a></li>
+						<li><a href="addmember.php">Add Member</a></li>
 					</ul>
 				</div>
 
