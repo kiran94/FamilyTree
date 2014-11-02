@@ -24,13 +24,15 @@
 
 				<div id='nav'>
 					<ul>
-						<li><a href="#">Home</a></li>
+						<li><a href="index.php">Home</a></li>
 						<li><a href="stats.php">Stats</a></li>
 						<li><a href="about.php">About</a></li>
+						<li><a href="addmember.php">Add Member</a></li>
 					</ul>
 				</div>
 
 			</div>
+			<hr class='page-break'/>
 		
 
 		<div class='col-xs-12'>
@@ -99,9 +101,9 @@
 					</tr>
 
 
-
+					
 					<tr>
-						<input type='Submit' value='Submit' />
+						<td><input type='Submit' value='Submit' /></td>
 					</tr>
 
 				</table>
@@ -114,7 +116,11 @@
 
 			</form>
 		</div>
+
+		<hr class='page-break'/>
+
 	</div>
+
 
 
 
