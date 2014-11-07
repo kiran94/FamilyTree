@@ -79,7 +79,7 @@
 
 
 							<?php
-								include 'connectioninfo.php'; 
+								include 'connectionInfo.php'; 
 								$con = mysqli_connect($host, $username, $password, $db); 
 								$query = "SELECT fName, relationID, YearOfBirth FROM relation"; 
 
