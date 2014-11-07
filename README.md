@@ -12,7 +12,7 @@ Installation:
 1. Clone Repo 
 2. Host the files on a web server or localhost
 3. Navigate to addmember.php
-4. Start adding family members in chronological order(This is optional but will help later), The root(Oldest Member) of the tree should have a parentID of 0. 
+4. Start adding family members in chronological order(This is optional but will help later), The root (Oldest Member) of the tree should have a parentID of 0 or Unknown. 
 5. Open index.php and edit line: 48. $indexes=array(); Within the indexes array will be the relationID of where you want to slice the tree from. e.g. $indexes=array(10, 37, 52, 70, 74); 
 
 In future updates, this last step will be made much easier for the user where they can slice the tree in a more user friendly way other than changing actual code. 
