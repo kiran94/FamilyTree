@@ -53,7 +53,10 @@
 				$indexObj = new indexing();
 				//Print Indexes out.
 				$indexObj->echoIndexes($indexes); 
-				
+
+				//Create new tree gen object to generate tree. 
+				$tree = new treeGen(); 
+
 				//For each node.. 
 				for($i=0; $i<sizeof($indexes); $i++)
 				{
@@ -70,16 +73,12 @@
 						echo "<div class='family-line' id='tree_" . $currentTree . "'>"; 
 					}
 
-					//Create new tree gen object to generate tree. 
-					$tree = new treeGen(); 
-
-					//Generate tree.  
+					//Generate tree, for current index.  
 					$tree->generateTree($indexes[$i]); 
 
 					echo "</div>"; 			
 				}
 			?>
-
 			</div>
 			<!-- end desktop -->
 
