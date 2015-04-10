@@ -35,80 +35,24 @@
 		</div>
 		<!-- end navigation -->
 		
-
 		<hr class='page-break'/>
 
+		<!-- treeGen Class -->
 		<?php include 'treeGen.php'; ?>
 
-		<!-- DESKTOP VERSION -->
+		<!-- desktop -->
 		<div class='col-sm-12 hidden-xs'>
 
 			<?php 
-				//Indexes used to splice the family tree
+				//Indexes to splice tree by. 
 				$indexes=array(10, 37, 52, 70, 74); 
 
-				//Container for list of start nodes. 
-				echo "<div class='family-starts'>"; 
-					echo "<p>Click the family line you want to view..</p>"; 
-					echo "<ul>"; 
-
-						$end = ""; 
-
-						if(sizeof($indexes) == 1)
-						{
-							$end = $indexes[$i];
-						}
-						else
-						{
-							for($j=0; $j<sizeof($indexes); $j++)
-							{
-								if($j!=sizeof($indexes)-1)
-								{
-									$end .= $indexes[$j] . " OR relationID=";
-								}
-								else
-								{
-									$end .= $indexes[$j]; 
-								}
-							}
-						}
-
-						//Connection class. 
-						require_once 'connectdb.php'; 
-
-						//Create new connection object. 
-						$connect = new connectdb();
-
-						//Return connection object. 
-						$con = $connect->make_connection(); 
-
-						//Get the name of the person at the split. 
-						$query = "SELECT fName FROM relation WHERE relationID=" . $end;
-						
-						$set = mysqli_query($con, $query); 
-						$currentIndex = 1; 
-
-						while($row = mysqli_fetch_array($set))
-						{
-							//Create a list of the current index. 
-							if($currentIndex==1)
-							{
-								echo "<li class='line-start current-line' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
-							}
-							else
-							{
-								echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
-							}
-							$currentIndex++;  
-							
-						}
-
-						mysqli_close($con);
-
-					//end list
-					echo "</ul>"; 
-				//end current block 
-				echo "</div>"; 
+				//Import the indexing class. 
+				require_once "indexing.php"; 
+				//Create a new indexing object. 
+				$indexObj = new indexing();
+				//Print Indexes out.
+				$indexObj->echoIndexes($indexes); 
 
 				//For each node.. 
 				for($i=0; $i<sizeof($indexes); $i++)
@@ -137,7 +81,7 @@
 			?>
 
 			</div>
-			<!-- END DESKTOP -->
+			<!-- end desktop -->
 
 			<!-- mobile -->
 			<div class='visible-xs'><h3>Currently no mobile support on this application. Sorry!</h3></div>
