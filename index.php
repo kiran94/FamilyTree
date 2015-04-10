@@ -3,116 +3,119 @@
 <head>
 	<title>Family Tree | Developed By Kiran Patel</title>
 
-	<!-- META -->
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<!-- END META -->
+	<!-- meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!-- end meta -->
 
-	<!-- STYLE -->
+	<!-- styles -->
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="styles/customStyle.css" />
 	<link rel="stylesheet" type="text/css" href="styles/tree.css" />
-	<!-- END STYLE -->
+	<!-- end styles -->
 </head>
 <body>
 
+	<!-- container -->
 	<div class='container'>
 
-		
-			<div class='col-xs-12'>
-				<h1 id='title'>Family Tree</h1>
+		<!-- navigation -->
+		<div class='col-xs-12'>
+			<h1 id='title'>Family Tree</h1>
 
-				<div id='nav'>
-					<ul>
-						<li><a href="#">Home</a></li>
-						<li><a href="stats.php">Stats</a></li>
-						<li><a href="about.php">About</a></li>
-						<li><a href="addmember.php">Add Member</a></li>
-					</ul>
-				</div>
-
+			<div id='nav'>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="stats.php">Stats</a></li>
+					<li><a href="about.php">About</a></li>
+					<li><a href="addmember.php">Add Member</a></li>
+				</ul>
 			</div>
+		</div>
+		<!-- end navigation -->
 		
 
 		<hr class='page-break'/>
 
-			<?php include 'treeGen.php'; ?>
+		<?php include 'treeGen.php'; ?>
 
-			<!-- DESKTOP VERSION -->
-			<div class='col-sm-12 hidden-xs'>
+		<!-- DESKTOP VERSION -->
+		<div class='col-sm-12 hidden-xs'>
 
-				<?php 
-					//Indexes used to splice the family tree
-					$indexes=array(10, 37, 52, 70, 74); 
+			<?php 
+				//Indexes used to splice the family tree
+				$indexes=array(10, 37, 52, 70, 74); 
 
-					//Container for list of start nodes. 
-					echo "<div class='family-starts'>"; 
-						echo "<p>Click the family line you want to view..</p>"; 
-						echo "<ul>"; 
+				//Container for list of start nodes. 
+				echo "<div class='family-starts'>"; 
+					echo "<p>Click the family line you want to view..</p>"; 
+					echo "<ul>"; 
 
-							//For each starting node.. 
-							for($i=0; $i<sizeof($indexes); $i++)
+						//For each starting node.. 
+						for($i=0; $i<sizeof($indexes); $i++)
+						{
+							//Connection class. 
+							require_once 'connectdb.php'; 
+
+							//Create new connection object. 
+							$connect = new connectdb();
+
+							//Return connection object. 
+							$con = $connect->make_connection(); 
+
+							//Get the name of the person at the split. 
+							$query = "SELECT fName FROM relation WHERE relationID=" . $indexes[$i]; 
+							//Query the database. 
+							$set = mysqli_query($con, $query); 
+							//Get the array.
+							$row = mysqli_fetch_array($set); 
+							//Get the index of the current iteration. 
+							$currentIndex = $i + 1;
+
+							//Create a list of the current index. 
+							if($currentIndex==1)
 							{
-								//GET CONNECTION INFO. 
-								require_once 'connectdb.php'; 
-
-								//Create new connection object. 
-								$connect = new connectdb();
-
-								//Return connection object. 
-								$con = $connect->make_connection(); 
-
-								//Get the name of the person at the split. 
-								$query = "SELECT fName FROM relation WHERE relationID=" . $indexes[$i]; 
-								//Query the database. 
-								$set = mysqli_query($con, $query); 
-								//Get the array.
-								$row = mysqli_fetch_array($set); 
-								//Get the index of the current iteration. 
-								$currentIndex = $i + 1;
-
-								//Create a list of the current index. 
-								if($currentIndex==1)
-								{
-									echo "<li class='line-start current-line' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
-								}
-								else
-								{
-									echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
-								}
-								
-								//Close connection. 
-								mysqli_close($con);
+								echo "<li class='line-start current-line' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
 							}
-						echo "</ul>"; 
-					echo "</div>"; 
+							else
+							{
+								echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
+							}
+							
+							//Close connection. 
+							mysqli_close($con);
+						}
+					//end list
+					echo "</ul>"; 
+				//end current block 
+				echo "</div>"; 
 
-					//For each node.. 
-					for($i=0; $i<sizeof($indexes); $i++)
+				//For each node.. 
+				for($i=0; $i<sizeof($indexes); $i++)
+				{
+					//Get the current index.. 
+					$currentTree = $i + 1; 
+
+					//If it is the first one then add a current-shown class. 
+					if($currentTree==1)
 					{
-						//Get the current index.. 
-						$currentTree = $i + 1; 
-
-						//If it is the first one then add a current-shown class. 
-						if($currentTree==1)
-						{
-							echo "<div class='family-line current-shown' id='tree_" . $currentTree . "'>"; 
-						}
-						else
-						{
-							echo "<div class='family-line' id='tree_" . $currentTree . "'>"; 
-						}
-
-						$tree = new treeGen(); 
-
-
-						//Generate tree for the current index.. 
-						$tree->startTags($indexes[$i]); 
-						$tree->endTags(); 	
-						echo "</div>"; 			
+						echo "<div class='family-line current-shown' id='tree_" . $currentTree . "'>"; 
 					}
-				?>
+					else
+					{
+						echo "<div class='family-line' id='tree_" . $currentTree . "'>"; 
+					}
+
+					//Create new tree gen object to generate tree. 
+					$tree = new treeGen(); 
+
+					//Generate tree.  
+					$tree->generateTree($indexes[$i]); 
+					
+					echo "</div>"; 			
+				}
+			?>
 
 			</div>
 			<!-- END DESKTOP -->

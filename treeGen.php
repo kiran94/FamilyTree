@@ -3,8 +3,21 @@
 	//Class provides application with way to generate the tree. 
 	class treeGen
 	{
+		//Function creates the tree.  
+		public function generateTree($parentID)
+		{
+			//Print Start tags to create tree. 
+			echo "<div class='tree'>"; 
+			echo "<ul>";
+
+			//Send parent ID to create all decendants. 
+			$this->createDesc($parentID);
+
+			$this->endGen(); 
+		}
+
 		//Function creates the decendents of the parameter parent id. 
-		function createDesc($currentParentID)
+		private function createDesc($currentParentID)
 		{
 			require_once 'connectdb.php'; 
 
@@ -45,19 +58,8 @@
 			mysqli_close($con); 
 		}
 
-		//Function starts the tree. 
-		function startTags($parentID)
-		{
-			//Print Start tags to create tree. 
-			echo "<div class='tree'>"; 
-			echo "<ul>";
-
-			//Send parent ID to create all decendants. 
-			$this->createDesc($parentID);
-		}
-
 		//Function ends the tree. 
-		function endTags()
+		private function endGen()
 		{
 			echo "</ul>"; 
 			echo "</div>"; 
