@@ -4,7 +4,7 @@
 
 	class indexing
 	{
-
+		//Function uses functions in this class to echo indexes. 
 		public function echoIndexes($indexes)
 		{
 			//Container for list of start nodes. 
@@ -36,20 +36,22 @@
 			echo "</div>"; 
 		}
 
+		//Function generates the query. 
 		private function genQuery($indexes)
 		{
-			//Get the name of the person at the split. 
-			$query = "SELECT fName FROM relation WHERE relationID="; 
+			//Base Query
+			$query = "SELECT fName FROM relation WHERE relationID=";
+			//Variable to hold rest of query.  
 			$end = ""; 
 
-			if(sizeof($indexes) == 1)
-			{
-				$end = $indexes[$i];
-			}
+			//If only one index in the array then set index. 
+			if(sizeof($indexes) == 1) { $end = $indexes[$i]; }
 			else
-			{
+			{	
+				//For all the indexes. 
 				for($j=0; $j<sizeof($indexes); $j++)
-				{
+				{	
+					//Append appropaite query. 
 					if($j!=sizeof($indexes)-1)
 					{
 						$end .= $indexes[$j] . " OR relationID=";
@@ -61,16 +63,21 @@
 				}
 			}
 
+			//Return concat of final query. 
 			return $query . $end; 
 		}
 
+
+		//Function prints the results into HTML. 
 		private function echoResults($set)
-		{
+		{	
+			//Set current index to 1. 
 			$currentIndex = 1; 
 
+			//For all the records in the row. 
 			while($row = mysqli_fetch_array($set))
 			{
-				//Create a list of the current index. 
+				//Create a list of the current index, with the first one having a current-line class. 
 				if($currentIndex==1)
 				{
 					echo "<li class='line-start current-line' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
@@ -79,6 +86,7 @@
 				{
 					echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
 				}
+				//Increment current index. 
 				$currentIndex++;  
 			}
 		}

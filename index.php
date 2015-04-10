@@ -53,7 +53,7 @@
 				$indexObj = new indexing();
 				//Print Indexes out.
 				$indexObj->echoIndexes($indexes); 
-
+				
 				//For each node.. 
 				for($i=0; $i<sizeof($indexes); $i++)
 				{
