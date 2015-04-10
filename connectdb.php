@@ -15,8 +15,6 @@
 			mysqli_select_db($con, $db) or die("Cannot connect to the database");
 			//Return connection. 
 			return $con; 
-		}
-
-	
+		}	
 	}
 ?>
