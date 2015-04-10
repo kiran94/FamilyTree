@@ -39,7 +39,6 @@
 
 			<?php include 'treeGen.php'; ?>
 
-	
 			<!-- DESKTOP VERSION -->
 			<div class='col-sm-12 hidden-xs'>
 
@@ -56,12 +55,13 @@
 							for($i=0; $i<sizeof($indexes); $i++)
 							{
 								//GET CONNECTION INFO. 
-								include 'connectionInfo.php'; 
+								require_once 'connectdb.php'; 
 
+								//Create new connection object. 
+								$connect = new connectdb();
 
-								//Create connection and set database. 
-								$con = mysqli_connect($host, $username, $password) or die("Cannot connect"); 
-								mysqli_select_db($con, $db) or die("Cannot connect to the database"); 
+								//Return connection object. 
+								$con = $connect->make_connection(); 
 
 								//Get the name of the person at the split. 
 								$query = "SELECT fName FROM relation WHERE relationID=" . $indexes[$i]; 
@@ -70,7 +70,8 @@
 								//Get the array.
 								$row = mysqli_fetch_array($set); 
 								//Get the index of the current iteration. 
-								$currentIndex = $i + 1; 
+								$currentIndex = $i + 1;
+
 								//Create a list of the current index. 
 								if($currentIndex==1)
 								{
@@ -86,7 +87,6 @@
 							}
 						echo "</ul>"; 
 					echo "</div>"; 
-
 
 					//For each node.. 
 					for($i=0; $i<sizeof($indexes); $i++)
@@ -104,45 +104,37 @@
 							echo "<div class='family-line' id='tree_" . $currentTree . "'>"; 
 						}
 
-						//Geneerate tree for the current index.. 
-						startTags($indexes[$i]); 
-						endTags(); 	
-						echo "</div>"; 
-								
+						$tree = new treeGen(); 
+
+
+						//Generate tree for the current index.. 
+						$tree->startTags($indexes[$i]); 
+						$tree->endTags(); 	
+						echo "</div>"; 			
 					}
-
-
 				?>
 
 			</div>
 			<!-- END DESKTOP -->
 
+			<!-- mobile -->
+			<div class='visible-xs'><h3>Currently no mobile support on this application. Sorry!</h3></div>
+			<!-- end mobile -->
 
-
-			<!-- MOBILE SUPPORT -->
-			<div class='visible-xs'>
-				<h3>Currently no mobile support on this application. Sorry! </h3>
-			</div>
-			<!-- END MOBILE -->
-		
-
-		
+			<!-- footer -->
 			<div class='col-xs-12'>
 				<hr class='page-break'/>
 				<h4>Developed By Kiran Patel</h4>
-
 			</div>
-		
+			<!-- end footer -->
 
+	</div> 
+	<!-- end container -->
 
-
-
-	<!-- END CONTAINER -->
-	</div>
-
-
-	<script type="text/javascript" src='scripts/jquery.js'></script>
+	<!-- scripts -->
+	<script type="text/javascript" src='scripts/jquery.min.js'></script>
 	<script type="text/javascript" src="scripts/bootstrap.min.js"></script>
 	<script type="text/javascript" src='scripts/customTrans.js'></script>
+	<!-- end scripts -->
 </body>
 </html>
