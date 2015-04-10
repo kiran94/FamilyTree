@@ -12,7 +12,7 @@
 
 			//Send parent ID to create all decendants. 
 			$this->createDesc($parentID);
-
+			//End the generation. 
 			$this->endGen(); 
 		}
 

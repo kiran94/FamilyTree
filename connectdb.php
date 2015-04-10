@@ -4,7 +4,7 @@
 	*/
 	class connectdb
 	{
-		function make_connection()
+		public function make_connection()
 		{
 			//Retrieve connection information. 
 			include "connectioninfo.php";
@@ -16,5 +16,7 @@
 			//Return connection. 
 			return $con; 
 		}
+
+	
 	}
 ?>

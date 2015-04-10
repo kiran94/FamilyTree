@@ -52,27 +52,44 @@
 					echo "<p>Click the family line you want to view..</p>"; 
 					echo "<ul>"; 
 
-						//For each starting node.. 
-						for($i=0; $i<sizeof($indexes); $i++)
+						$end = ""; 
+
+						if(sizeof($indexes) == 1)
 						{
-							//Connection class. 
-							require_once 'connectdb.php'; 
+							$end = $indexes[$i];
+						}
+						else
+						{
+							for($j=0; $j<sizeof($indexes); $j++)
+							{
+								if($j!=sizeof($indexes)-1)
+								{
+									$end .= $indexes[$j] . " OR relationID=";
+								}
+								else
+								{
+									$end .= $indexes[$j]; 
+								}
+							}
+						}
 
-							//Create new connection object. 
-							$connect = new connectdb();
+						//Connection class. 
+						require_once 'connectdb.php'; 
 
-							//Return connection object. 
-							$con = $connect->make_connection(); 
+						//Create new connection object. 
+						$connect = new connectdb();
 
-							//Get the name of the person at the split. 
-							$query = "SELECT fName FROM relation WHERE relationID=" . $indexes[$i]; 
-							//Query the database. 
-							$set = mysqli_query($con, $query); 
-							//Get the array.
-							$row = mysqli_fetch_array($set); 
-							//Get the index of the current iteration. 
-							$currentIndex = $i + 1;
+						//Return connection object. 
+						$con = $connect->make_connection(); 
 
+						//Get the name of the person at the split. 
+						$query = "SELECT fName FROM relation WHERE relationID=" . $end;
+						
+						$set = mysqli_query($con, $query); 
+						$currentIndex = 1; 
+
+						while($row = mysqli_fetch_array($set))
+						{
 							//Create a list of the current index. 
 							if($currentIndex==1)
 							{
@@ -82,10 +99,12 @@
 							{
 								echo "<li class='line-start' id='" . $currentIndex . "' >" . $row['fName'] ."</li>"; 
 							}
+							$currentIndex++;  
 							
-							//Close connection. 
-							mysqli_close($con);
 						}
+
+						mysqli_close($con);
+
 					//end list
 					echo "</ul>"; 
 				//end current block 
@@ -112,7 +131,7 @@
 
 					//Generate tree.  
 					$tree->generateTree($indexes[$i]); 
-					
+
 					echo "</div>"; 			
 				}
 			?>
